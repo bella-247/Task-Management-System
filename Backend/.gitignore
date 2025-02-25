@@ -17,7 +17,7 @@
 
 # Ignore Python / Flask related files
 __pycache__/           
-venv                  
+venv/               
 .env                   
 .flaskenv              
 .pytest_cache/          
