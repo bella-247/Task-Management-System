@@ -1,0 +1,29 @@
+# Logs
+*.log
+
+.env                         
+
+# # Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+# Thumbs.db     # Windows system file
+
+# Ignore Python / Flask related files
+__pycache__/           
+venv                  
+.env                   
+.flaskenv              
+.pytest_cache/          
+instance/               
+coverage/               
+
+
+# # Ignore other potentially sensitive files
+
