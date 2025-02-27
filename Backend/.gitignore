@@ -1,8 +1,6 @@
 # Logs
 *.log
 
-.env                         
-
 # # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -18,12 +16,18 @@
 # Ignore Python / Flask related files
 __pycache__/           
 venv/               
-.env                   
+*.env
+*.venv              
 .flaskenv              
 .pytest_cache/          
 instance/               
 coverage/               
 
 
-# # Ignore other potentially sensitive files
+# Ignore database files
+
+migrations/*.pyc
+migrations/*.pyo
+migrations/*.pyd
+migrations/__pycache__/
 

@@ -26,4 +26,6 @@ dist-ssr
 Thumbs.db     # Windows system file
 
 
-*.env                          
+*.env
+*.venv                      
+*.map
