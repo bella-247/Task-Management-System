@@ -16,17 +16,16 @@
 # Ignore Python / Flask related files
 __pycache__/           
 venv/               
-*.env
-*.venv              
+*.env        
 .flaskenv              
-.pytest_cache/          
+.pytest_cache/
 instance/               
-coverage/               
+coverage/       
 
 
 # Ignore database files
 
-migrations/*.pyc
+# migrations/*.pyc
 migrations/*.pyo
 migrations/*.pyd
 migrations/__pycache__/
