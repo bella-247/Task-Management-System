@@ -29,3 +29,5 @@ Thumbs.db     # Windows system file
 *.env
 *.venv                      
 *.map
+
+try*

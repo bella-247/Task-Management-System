@@ -1,8 +1,74 @@
-main.register-form {
-  background-color: white;
-  color: black;
-  padding: 20px;
+main.register-form, main.login-form {
+  position: relative;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-main.register-form * {
-  margin: 10px;
+main.register-form form, main.login-form form {
+  width: clamp(300px, 50vw, 400px);
+  border: 2px solid black;
+  box-shadow: 0 10px rgb(0, 0, 0);
+  padding: 2rem;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+main.register-form form .form-group, main.login-form form .form-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+main.register-form form .form-group label, main.login-form form .form-group label {
+  font-size: 0.9rem;
+  display: block;
+  margin: 0 0.5rem;
+}
+main.register-form form .form-group input, main.login-form form .form-group input {
+  width: 100%;
+  border-radius: 0.25rem;
+  outline: none;
+  border: none;
+  padding: 0.5rem 1rem;
+  background-color: rgba(51, 51, 255, 0.1333333333) !important;
+  transition-property: box-shadow, background-color;
+  transition-duration: 100ms;
+  transition-timing-function: linear;
+}
+main.register-form form .form-group input:focus, main.login-form form .form-group input:focus {
+  box-shadow: 0 2px #000;
+}
+main.register-form form .form-group input:disabled, main.login-form form .form-group input:disabled {
+  background-color: rgba(85, 85, 85, 0.3333333333);
+  cursor: not-allowed;
+}
+main.register-form form button[type=submit], main.login-form form button[type=submit] {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: #000;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.2rem;
+  transition: 100ms background-color linear;
+}
+main.register-form form button[type=submit]:not(:disabled):hover, main.login-form form button[type=submit]:not(:disabled):hover {
+  background-color: #333;
+}
+main.register-form form button[type=submit]:active, main.login-form form button[type=submit]:active {
+  background-color: #111;
+}
+main.register-form form button[type=submit]:disabled, main.login-form form button[type=submit]:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+}
+main.register-form form button[type=submit]:focus-visible, main.login-form form button[type=submit]:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 2px;
 }/*# sourceMappingURL=forms.css.map */

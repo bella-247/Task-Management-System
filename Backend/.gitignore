@@ -30,3 +30,6 @@ migrations/*.pyo
 migrations/*.pyd
 migrations/__pycache__/
 
+
+
+try*

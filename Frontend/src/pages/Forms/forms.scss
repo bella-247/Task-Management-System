@@ -1,8 +1,142 @@
-main.register-form{
-    background-color: white;
-    color : black;
-    padding: 20px;
-    *{
-        margin: 10px;
+%submit-button {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: #000;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.2rem;
+    transition: 100ms background-color linear;
+    &:not(:disabled):hover{
+        background-color: #333;
+    }
+    &:active{
+        background-color: #111;
+    }
+    &:disabled{
+        background-color: #555;
+        cursor: not-allowed;
     }
 }
+
+
+main.register-form, main.login-form{
+    position: relative;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    form{
+        width: clamp(300px, 50vw, 400px);
+        border: 2px solid black;
+        box-shadow:  0 10px rgba(0,0,0);
+        padding: 2rem;
+        border-radius: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        .form-group{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            label{
+                font-size: 0.9rem;
+                display: block;
+                margin: 0 0.5rem;
+            }
+            input{
+                width: 100%;
+                border-radius: 0.25rem;
+                outline: none;
+                border: none;
+                padding: 0.5rem 1rem;
+                background-color: #3333ff22 !important;
+                transition-property: box-shadow, background-color;
+                transition-duration: 100ms;
+                transition-timing-function: linear;
+                &:focus{
+                    box-shadow: 0 2px #000;
+                }
+                &:disabled{
+                    background-color: #5555;
+                    cursor: not-allowed;
+                }
+            }
+        }
+        button[type='submit']{
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background-color: #000;
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: 100ms background-color linear;
+            &:not(:disabled):hover{
+                background-color: #333;
+            }
+            &:active{
+                background-color: #111;
+            }
+            &:disabled{
+                background-color: #555;
+                cursor: not-allowed;
+            }
+            &:focus-visible{
+                outline: 2px solid #000;
+                outline-offset: 2px;
+            }
+        }
+    }
+}
+
+// main.login-form{
+//     position: relative;
+//     width: 100%;
+//     flex-grow: 1;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     form{
+//         min-width: clamp(300px, 50vw, 400px);
+//         border: 2px solid black;
+//         box-shadow:  0 10px rgba(0,0,0);
+//         padding: 2rem;
+//         border-radius: 1rem;
+//         display: flex;
+//         flex-direction: column;
+//         justify-content: center;
+//         align-items: center;
+//         gap: 2rem;
+//         .form-group{
+//             width: 100%;
+//             display: flex;
+//             flex-direction: column;
+//             gap: 0.5rem;
+//             label{
+//                 font-size: 0.9rem;
+//                 display: block;
+//                 margin: 0 0.5rem;
+//             }
+//             input{
+//                 width: 100%;
+//                 border-radius: 0.25rem;
+//                 outline: none;
+//                 border: none;
+//                 padding: 0.5rem 1rem;
+//                 background-color: #3333ff22;
+//                 box-shadow: 0 2px #000;
+//             }
+//         }
+//         button[type='submit']{
+//             @extend %submit-button;
+//         }
+//     }
+// }

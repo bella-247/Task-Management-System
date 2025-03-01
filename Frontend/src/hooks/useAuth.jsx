@@ -9,7 +9,7 @@ const useAuth = ()=>{
 
     const registerUser = async (userData) => {
         setLoading(true);
-
+        setError(null);
         try{
             const response = await axios.post(`${API_URL}/register`, userData, {
                 headers: {
@@ -19,19 +19,30 @@ const useAuth = ()=>{
             
             localStorage.setItem("access_token", response.data.access_token);
             localStorage.setItem("user", JSON.stringify(response.data.user));
-            setError(null);
-            return response.data;
+
+            return await new Promise(resolve =>{
+                setTimeout(()=>{
+                    if (response.data){
+                        resolve(response.data)
+                    }
+                    else{
+                        resolve(null)
+                    }
+                }, 5000)
+                })
         }
         catch (err){
             setError(err.response?.data?.message || "Registration Failed")
         }
         finally{
+            console.log("finally block is executed")
             setLoading(false);
         }
     }
 
     const loginUser = async (userData)=>{
         setLoading(true);
+        setError(null);
         try{
             const response = await axios.post(`${API_URL}/login`, userData, {
                 headers: {
@@ -42,8 +53,20 @@ const useAuth = ()=>{
             
             localStorage.setItem("access_token", access_token);
             localStorage.setItem("user", JSON.stringify({id, username, email, profile}));
-            setError(null);
-            return response.data;
+
+            console.log("reponse data", response.data)
+            
+            return await new Promise((resolve)=>{
+                console.log("the respones is recieved but i am just waiting before i responed")
+                setTimeout(()=>{
+                    if (response.data){
+                        resolve(response.data)
+                    }
+                    else{
+                        resolve(null)
+                    }
+                }, 5000);
+            })
         }
         catch(err){
             setError(err.response?.data?.message || "Login Failed");
