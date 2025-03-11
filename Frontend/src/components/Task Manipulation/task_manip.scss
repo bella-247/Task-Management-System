@@ -1,0 +1,99 @@
+@mixin btns-bg-color($mainColor, $hoverColor, $activeColor){
+    background-color: $mainColor;
+    &:hover{
+        background-color: $hoverColor;
+    }
+    &:active{
+        background-color: $activeColor;
+    }
+    &:focus-visible{
+        outline: 2px solid $mainColor;
+        outline-offset: 2px;
+    }
+}
+
+
+.add-task-container{
+    visibility: hidden;
+    opacity: 0;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 1rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    animation: showup 200ms linear forwards;
+    @keyframes showup{
+        from{
+            visibility: hidden;
+            opacity: 0;
+        }
+        to{
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+    .form-container{
+        form#add-task-form{
+            width: clamp(325px, 80%, 350px);
+            max-height: 90%;
+            overflow-y: auto;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 1.5rem 2rem 2rem;
+            border-radius: 0.5rem;
+            background-color: white;
+            h1{
+                text-align: center;
+            }
+            .form-group{
+                display: flex;
+                flex-direction: column;
+                gap: 0.25rem;
+
+                input, textarea, select{
+                    display: block;
+                    width: 100%;
+                    padding: 0.5rem;
+                    border-radius: 0.25rem;
+                    border: none;
+                    outline: none;
+                    background-color: #0001;
+                    color: black;
+                    transition: background-color 100ms linear;
+                    &:focus-visible{
+                        outline: 2px solid #0001;
+                        outline-offset: 2px;
+                    }
+                }
+                textarea{
+                    resize: vertical;
+                    min-height: 2rem;
+                    max-height: 5rem;
+                }
+
+            }
+            button{
+                width: fit-content;
+                padding: 0.5rem 1rem;
+                margin: auto ;
+                border-radius: 0.25rem;
+                background-color: #ffdd00;
+                color: black;
+                font-size: 1.1rem;
+                cursor: pointer;
+                border: none;
+                outline: none;
+                transition: background-color 100ms linear;
+                @include btns-bg-color(#ffdd00, #eecc00, #ccaa00);
+            }
+        }
+    }
+}

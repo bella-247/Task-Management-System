@@ -1,0 +1,92 @@
+.add-task-container {
+  visibility: hidden;
+  opacity: 0;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  animation: showup 200ms linear forwards;
+}
+@keyframes showup {
+  from {
+    visibility: hidden;
+    opacity: 0;
+  }
+  to {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+.add-task-container .form-container form#add-task-form {
+  width: clamp(325px, 80%, 350px);
+  max-height: 90%;
+  overflow-y: auto;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem 2rem 2rem;
+  border-radius: 0.5rem;
+  background-color: white;
+}
+.add-task-container .form-container form#add-task-form h1 {
+  text-align: center;
+}
+.add-task-container .form-container form#add-task-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.add-task-container .form-container form#add-task-form .form-group input, .add-task-container .form-container form#add-task-form .form-group textarea, .add-task-container .form-container form#add-task-form .form-group select {
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  border: none;
+  outline: none;
+  background-color: rgba(0, 0, 0, 0.0666666667);
+  color: black;
+  transition: background-color 100ms linear;
+}
+.add-task-container .form-container form#add-task-form .form-group input:focus-visible, .add-task-container .form-container form#add-task-form .form-group textarea:focus-visible, .add-task-container .form-container form#add-task-form .form-group select:focus-visible {
+  outline: 2px solid rgba(0, 0, 0, 0.0666666667);
+  outline-offset: 2px;
+}
+.add-task-container .form-container form#add-task-form .form-group textarea {
+  resize: vertical;
+  min-height: 2rem;
+  max-height: 5rem;
+}
+.add-task-container .form-container form#add-task-form button {
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  margin: auto;
+  border-radius: 0.25rem;
+  background-color: #ffdd00;
+  color: black;
+  font-size: 1.1rem;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: background-color 100ms linear;
+  background-color: #ffdd00;
+}
+.add-task-container .form-container form#add-task-form button:hover {
+  background-color: #eecc00;
+}
+.add-task-container .form-container form#add-task-form button:active {
+  background-color: #ccaa00;
+}
+.add-task-container .form-container form#add-task-form button:focus-visible {
+  outline: 2px solid #ffdd00;
+  outline-offset: 2px;
+}/*# sourceMappingURL=task_manip.css.map */
