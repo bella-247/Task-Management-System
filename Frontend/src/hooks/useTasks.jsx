@@ -1,5 +1,6 @@
 import { useState } from "react"
-import api from "../api";
+import api from "../api/api";
+import axios from "axios";
 
 
 const useTasks = ()=>{
@@ -10,8 +11,11 @@ const useTasks = ()=>{
     const get_tasks = async ()=>{
         setLoading(true);
         try{
-            const response = await axios.get("/tasks");
-            setTasks(response.data || []);
+            const response = await api.get("/tasks/");
+
+            console.log('reponse', response)
+            setTasks(response?.data?.tasks || []);
+            return "success";
         }
         catch(err){
             setError(err.response?.data?.message || "Failed to fetch tasks")
@@ -27,6 +31,7 @@ const useTasks = ()=>{
             const response = await api.post("/tasks", taskData);
             setTasks([...tasks, response.data]);
             setError(null);
+            return response.data;
         }
         catch (err) {
             setError(err.response?.data?.message || "Failed to add task");
@@ -49,6 +54,9 @@ const useTasks = ()=>{
         }
         catch(err){
             setError(err.response?.data?.message || "Failed to update the task")
+        }
+        finally{
+            setLoading(false)
         }
     }
 

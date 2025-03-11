@@ -26,7 +26,7 @@ const App = () => {
 
     return (
         <Router>
-            <NavBar/>
+            {/* <NavBar/> */}
             <Routes>
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/dashboard" element={<Dashboard />} />

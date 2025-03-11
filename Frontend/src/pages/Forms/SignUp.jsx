@@ -5,8 +5,9 @@ import MessageBox from "../../components/MessageBox/MessageBox";
 import "./Forms.css";
 
 const SignUp = () => {
-    const [redirecting, setRedirecting] = useState(false);
     const { registerUser, loading, error } = useAuth();
+    const [redirecting, setRedirecting] = useState(false);
+    const [formError, setFormError] = useState(null)
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {

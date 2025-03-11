@@ -71,4 +71,4 @@ main.register-form form button[type=submit]:disabled, main.login-form form butto
 main.register-form form button[type=submit]:focus-visible, main.login-form form button[type=submit]:focus-visible {
   outline: 2px solid #000;
   outline-offset: 2px;
-}/*# sourceMappingURL=forms.css.map */
+}/*# sourceMappingURL=Forms.css.map */

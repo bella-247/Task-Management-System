@@ -1,1 +1,94 @@
-/*# sourceMappingURL=Dashboard.css.map */
+main#dashboard {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.1333333333);
+}
+main#dashboard .contents-container {
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+  height: 100vh;
+}
+main#dashboard .contents-container section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  overflow: auto;
+  padding: 1.5rem 1rem;
+  background-color: white;
+  border-radius: 0.5rem;
+}
+main#dashboard .contents-container section.tasks-section {
+  width: clamp(300px, 90vw, 1000px);
+}
+main#dashboard .contents-container section.tasks-section::-webkit-scrollbar {
+  width: 5px;
+}
+main#dashboard .contents-container section.tasks-section::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3333333333);
+  border-radius: 0.5rem;
+}
+main#dashboard .contents-container section.tasks-section.no-task {
+  justify-content: center;
+}
+main#dashboard .contents-container section.tasks-section.no-task::before {
+  content: "No Tasks Yet";
+}
+main#dashboard .contents-container section.filters-section {
+  min-width: 200px;
+}
+main#dashboard .contents-container #add-task-btn {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  color: white;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: #000;
+  transition: rotate 100ms linear;
+}
+main#dashboard .contents-container #add-task-btn:hover {
+  background-color: #333;
+}
+main#dashboard .contents-container #add-task-btn:active {
+  background-color: #444;
+}
+main#dashboard .contents-container #add-task-btn:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
+main#dashboard .contents-container #add-task-btn.active {
+  rotate: 45deg;
+}
+
+@media screen and (max-width: 768px) {
+  main#dashboard .contents-container {
+    flex-direction: column-reverse;
+    align-items: center;
+    height: auto;
+  }
+  main#dashboard .contents-container section {
+    width: 100%;
+  }
+  main#dashboard .contents-container section.filters-container {
+    overflow: auto hidden;
+    max-height: 200px;
+  }
+  main#dashboard .contents-container section.tasks-section {
+    flex-grow: 1;
+  }
+  main#dashboard .contents-container #add-task-btn {
+    display: none;
+  }
+}/*# sourceMappingURL=Dashboard.css.map */
