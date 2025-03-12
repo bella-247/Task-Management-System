@@ -118,3 +118,18 @@ ul.tasks-list-container{
         }
     }
 }
+
+.dark{
+    ul.tasks-list-container{
+        .tasks{
+            background-color: #dddd;
+            background-color: #333;
+            color: white;
+            .properties-container{
+                .properties{
+                    background-color: black;
+                }
+            }
+        }
+    }
+}

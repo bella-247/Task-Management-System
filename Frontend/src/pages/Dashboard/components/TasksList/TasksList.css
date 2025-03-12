@@ -117,4 +117,13 @@ ul.tasks-list-container.no-task::before {
   content: "No Tasks Yet";
   color: gray;
   font-size: 1.25rem;
+}
+
+.dark ul.tasks-list-container .tasks {
+  background-color: rgba(221, 221, 221, 0.8666666667);
+  background-color: #333;
+  color: white;
+}
+.dark ul.tasks-list-container .tasks .properties-container .properties {
+  background-color: black;
 }/*# sourceMappingURL=TasksList.css.map */

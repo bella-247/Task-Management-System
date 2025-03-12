@@ -1,10 +1,11 @@
-import React from "react";
 import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 // import Home from './pages/Home'
 import Login from './pages/Forms/LogIn';
 import SignUp from "./pages/Forms/SignUp";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import NavBar from "./components/Navbar/NavBar";
+import { ThemeProvider } from "./context/ThemeContext";
+import ThemeToggler from "./components/ThemeToggler/ThemeToggler";
 // import Dashboard from './pages/Dashboard'
 // import PrivateRoute from './components/PrivateRoute'
 // import { ProvideAuth } from './hooks/useAuth'
@@ -25,15 +26,18 @@ const App = () => {
       })
 
     return (
-        <Router>
-            {/* <NavBar/> */}
-            <Routes>
-                <Route path="/" element={<Dashboard />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<SignUp />} />
-            </Routes>
-        </Router>
+        <ThemeProvider>
+            <Router>
+                {/* <NavBar/> */}
+                <ThemeToggler/>
+                <Routes>
+                    <Route path="/" element={<Dashboard />} />
+                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/signup" element={<SignUp />} />
+                </Routes>
+            </Router>
+        </ThemeProvider>
     );
 };
 

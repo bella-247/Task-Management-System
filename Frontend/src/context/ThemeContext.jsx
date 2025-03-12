@@ -1,21 +1,27 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 const ThemeContext = createContext();
 
-const ThemeProvider = ({children})=>{
-    const storage = localStorage.getItem("task-management-user-theme") || 'light';
-    const [theme, setTheme] = useState(storage);
+const ThemeProvider = ({ children }) => {
+    const [theme, setTheme] = useState(() => {
+        return localStorage.getItem("task-management-user-theme") || "light";
+    });
 
-    const changeTheme = (newTheme)=>{
+    const changeTheme = (newTheme) => {
         setTheme(newTheme);
-        localStorage.setItem('task-management-user-theme', theme);
-    }
+        localStorage.setItem('task-management-user-theme', newTheme);
+    };
+
+    useEffect(() => {
+        if (!localStorage.getItem("task-management-user-theme")) {
+            localStorage.setItem('task-management-user-theme', theme);
+        }
+    }, [theme]);
 
     return (
-        <ThemeContext.Provider value={{theme, changeTheme}}>
+        <ThemeContext.Provider value={{ theme, changeTheme }}>
             {children}
         </ThemeContext.Provider>
-    )
-}
-
-export {ThemeContext, ThemeProvider};
+    );
+};
+export { ThemeContext, ThemeProvider };

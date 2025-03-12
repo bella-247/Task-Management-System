@@ -1,13 +1,18 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 import "./Dashboard.css";
 import ManipulateTask from "../../components/Task Manipulation/Task_Manip";
 import useTasks from "../../hooks/useTasks";
 import TasksList from "./components/TasksList/TasksList";
 
+import { ThemeContext } from "../../context/ThemeContext";
+
 const Dashboard = () => {
+    const {theme} = useContext(ThemeContext);
     const [isAdding, setIsAdding ] = useState(false);
     const [isUpdating, setIsUpdating ] = useState(false);
+
+    console.log("theme", theme);
 
     document.addEventListener("keydown", (e) => {
         if (e.key === "Escape" && (isAdding || isUpdating)) {
@@ -17,7 +22,7 @@ const Dashboard = () => {
     });
 
     return (
-        <main id="dashboard">
+        <main id="dashboard" className={theme}>
             <div className="contents-container">
             <section className="tasks-section">
                     <h1>Tasks</h1>
@@ -29,7 +34,7 @@ const Dashboard = () => {
                 <section className="filters-section ">
                     <h1>Filters</h1>
                     {/* ! add the filters here  */}
-                    
+
                 </section>
 
 
