@@ -1,43 +1,37 @@
-import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
-// import Home from './pages/Home'
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from './pages/Forms/LogIn';
 import SignUp from "./pages/Forms/SignUp";
 import Dashboard from "./pages/Dashboard/Dashboard";
-import NavBar from "./components/Navbar/NavBar";
+import NavBar from "./components/NavBar/NavBar";
 import { ThemeProvider } from "./context/ThemeContext";
-import ThemeToggler from "./components/ThemeToggler/ThemeToggler";
-// import Dashboard from './pages/Dashboard'
-// import PrivateRoute from './components/PrivateRoute'
-// import { ProvideAuth } from './hooks/useAuth'
-// import { ProvideUser } from './hooks/useUser'
-// import { ProvideWallet } from './hooks/useWallet'
-// import { ProvideTransactions } from './hooks/useTransactions'
-
-
-
+import { TasksProvider } from "./context/TasksContext";
+import { AuthProvider } from "./context/AuthContext";
 
 const App = () => {
     window.addEventListener("load", ()=>{
         const token = localStorage.getItem("access_token");
         if(!token && window.location.pathname !== "/login" && window.location.pathname !== "/signup"){
-          alert("Please login to continue");
-          window.location.href = "/login";
+          window.location.href = "/signup";
         }
       })
 
     return (
-        <ThemeProvider>
-            <Router>
-                {/* <NavBar/> */}
-                <ThemeToggler/>
-                <Routes>
-                    <Route path="/" element={<Dashboard />} />
-                    <Route path="/dashboard" element={<Dashboard />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/signup" element={<SignUp />} />
-                </Routes>
-            </Router>
-        </ThemeProvider>
+        <AuthProvider>
+            <ThemeProvider>
+                <TasksProvider>
+                    <Router>
+                        <NavBar/>
+                        <Routes>
+                            <Route path="/" element={<Dashboard />} />
+                            <Route path="/dashboard" element={<Dashboard />} />
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/signup" element={<SignUp />} />
+                            <Route path="*" element={<h1>Page Not Found</h1>} />
+                        </Routes>
+                    </Router>
+                </TasksProvider>
+            </ThemeProvider>
+        </AuthProvider>
     );
 };
 

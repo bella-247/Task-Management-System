@@ -1,17 +1,4 @@
-@mixin btns-bg-color($mainColor, $hoverColor, $activeColor){
-    background-color: $mainColor;
-    &:hover{
-        background-color: $hoverColor;
-    }
-    &:active{
-        background-color: $activeColor;
-    }
-    &:focus-visible{
-        outline: 2px solid $mainColor;
-        outline-offset: 2px;
-    }
-}
-
+@use "../../styles/shared-styles.scss" as global;
 
 .add-task-container{
     visibility: hidden;
@@ -25,7 +12,6 @@
     justify-content: center;
     align-items: center;
     padding: 0 1rem;
-    background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(5px);
     animation: showup 200ms linear forwards;
     @keyframes showup{
@@ -39,8 +25,9 @@
         }
     }
     .form-container{
+        width: 100%;
         form#add-task-form{
-            width: clamp(325px, 80%, 350px);
+            width: clamp(20rem, 80%, 22rem);
             max-height: 90%;
             overflow-y: auto;
             margin: auto;
@@ -49,13 +36,12 @@
             gap: 1rem;
             padding: 1.5rem 2rem 2rem;
             border-radius: 0.5rem;
-            background-color: white;
             h1{
                 text-align: center;
             }
             .form-group{
                 display: flex;
-                flex-direction: column;
+                flex-direction: column-reverse;
                 gap: 0.25rem;
 
                 input, textarea, select{
@@ -65,12 +51,15 @@
                     border-radius: 0.25rem;
                     border: none;
                     outline: none;
-                    background-color: #0001;
-                    color: black;
-                    transition: background-color 100ms linear;
                     &:focus-visible{
-                        outline: 2px solid #0001;
                         outline-offset: 2px;
+                    }
+                    &:required + label{
+                        &::after{
+                            content: "*";
+                            color: red;
+                            margin-left: 0.25rem;
+                        }
                     }
                 }
                 textarea{
@@ -78,7 +67,6 @@
                     min-height: 2rem;
                     max-height: 5rem;
                 }
-
             }
             button{
                 width: fit-content;
@@ -92,7 +80,50 @@
                 border: none;
                 outline: none;
                 transition: background-color 100ms linear;
-                @include btns-bg-color(#ffdd00, #eecc00, #ccaa00);
+                @include global.btns-bg-color(#ffdd00, #eecc00, #ccaa00);
+            }
+        }
+    }
+}
+
+.add-task-container.light{
+    background-color: #0009;
+    .form-container{
+        form#add-task-form{
+            background-color: #fff;
+            .form-group{
+                input, textarea, select{
+                    background-color: #0001;
+                    color: black;
+                    &:focus-visible{
+                        outline: 2px solid #0001;
+                    }
+                    &::placeholder{
+                        color: #555;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.add-task-container.dark{
+    background-color: #2224;
+    .form-container{
+        form#add-task-form{
+            background-color: #555;
+            .form-group{
+                input, textarea, select {
+                    background-color: #1b1919;
+                    color: white;
+                    accent-color: white;
+                    &:focus-visible{
+                        outline: 2px solid #000;
+                    }
+                    &::placeholder{
+                        color: #999;
+                    }
+                }
             }
         }
     }

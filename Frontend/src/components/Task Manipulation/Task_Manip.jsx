@@ -1,124 +1,153 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useContext, useMemo } from "react";
 import useTasks from "../../hooks/useTasks";
+import { ThemeContext } from "../../context/ThemeContext";
+import MessageBox from "../MessageBox/MessageBox";
+
 import "./task_manip.css";
 
 const ManipulateTask = ({
     isAdding = false,
     isUpdating = false,
-    setIsAdding = () => {},
-    setIsUpdating = () => {},
-    new_values = {},
+    setIsAdding,
+    setIsUpdating,
+    editingValues = {}
 }) => {
-    const { add_task, loading, error } = useTasks();
+    const defaultEditingValues = useMemo(()=>(
+        {
+            id : "",
+            title: "Bella come here",
+            description: "nice to see you here bella",
+            status: "In progress",
+            priority: "high",
+            due_date: "2005-03-22",
+            due_time: "12:00",
+        }
+    ), [])
 
-    const [formValues, setFormValues] = useState(new_values);
+    const { theme } = useContext(ThemeContext);
+    const { add_task, update_task, loading, error } = useTasks();
+    const [formValues, setFormValues] = useState((editingValues && Object.keys(editingValues).length) ? editingValues : defaultEditingValues);
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        switch (name) {
-            case "title":
-                setTitle(value);
-                break;
-            case "description":
-                setDescription(value);
-                break;
-            case "status":
-                setStatus(value);
-                break;
-            case "priority":
-                setPriority(value);
-                break;
-            case "due_date":
-                setDueDate(value);
-                break;
-            case "due_time":
-                setDueTime(value);
-                break;
-        }
+        setFormValues({
+            ...formValues,
+            [e.target.name]: e.target.value,
+        });
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        try {
-            const taskData = {
-                title: e.target.title.value,
-                description: e.target.description.value,
-                status: e.target.status.value,
-                priority: e.target.priority.value,
-                due_date: e.target.due_date.value,
-                due_time: e.target.due_time.value,
-            };
-            const response = add_task(taskData);
+        try{
+            if(isAdding){
+                add_task(formValues)
+            }
+            else if(isUpdating){
+                update_task(formValues)
+            }
             setIsAdding(false)
             setIsUpdating(false)
-        } catch (err) {
-            console.log();
+        }
+        catch(err){
+            console.error(err)
         }
     };
 
     return (
-        <div className="add-task-container">
-            <div className="form-container">
-                <form
-                    action="#"
-                    method="POST"
-                    id="add-task-form"
-                    onSubmit={handleSubmit}
-                >
-                    <h1>Add Task</h1>
-                    <div className="form-group">
-                        <label htmlFor="title">Title</label>
-                        <input
-                            type="text"
-                            id="title"
-                            name="title"
-                            value={title}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="description">Description</label>
-                        <textarea
-                            name="description"
-                            id="description"
-                            onChange={handleChange}
-                        ></textarea>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="status">Status</label>
-                        <select
-                            name="status"
-                            id="status"
-                            value={status}
-                            onChange={handleChange}
-                        >
-                            <option value="Not Started">Not Started</option>
-                            <option value="In Progress">In Progress</option>
-                            <option value="Completed">Completed</option>
-                        </select>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="priority">Priority</label>
-                        <select name="priority" id="priority" value={priority} onChange={handleChange}>
-                            <option value="Low">Low</option>
-                            <option value="Medium">Medium</option>
-                            <option value="High">High</option>
-                        </select>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="due_date">Due Date</label>
-                        <input type="date" name="due_date" value={dueDate} onChange={handleChange}/>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="due_time">Due Time</label>
-                        <input type="time" name="due_time" value={dueTime} onChange={handleChange}/>
-                    </div>
-                    <button type="submit">{isAdding ? "Add" : "Edit"} Task</button>
-                </form>
+        <>
+            {loading && <MessageBox mode = "info" content = {isAdding ? "Adding the Task to the database.." : "Updating the task in the databse"}/>}
+            {error && <MessageBox mode = 'error' content = {error} timer={true} resetTrigger={error}/>}
+            <div className={`add-task-container ${theme}`}>
+                <div className="form-container">
+                    <form method="POST" id="add-task-form" onSubmit={handleSubmit}>
+                        <h1>{isAdding ? "Add Task" : "Task Details"}</h1>
+                        <div className="form-group">
+                            <input
+                                type="text"
+                                id="title"
+                                name="title"
+                                value={formValues.title}
+                                onChange={handleChange}
+                                spellCheck="true"
+                                placeholder="Enter the title here..."
+                                required
+                            />
+                            <label htmlFor="title">Title</label>
+                        </div>
+
+                        <div className="form-group">
+                            <textarea
+                                name="description"
+                                id="description"
+                                value={formValues.description}
+                                onChange={handleChange}
+                                spellCheck="true"
+                                placeholder="Enter the description here..."
+                            ></textarea>
+                            <label htmlFor="description">Description</label>
+                        </div>
+
+                        <div className="form-group">
+                            <select
+                                name="status"
+                                id="status"
+                                value={formValues.status}
+                                onChange={handleChange}
+                                required
+                            >
+                                <option value="Not started">Not Started</option>
+                                <option value="In progress">In Progress</option>
+                                <option value="Completed">Completed</option>
+                            </select>
+                            <label htmlFor="status">Status</label>
+                        </div>
+
+                        <div className="form-group">
+                            <select
+                                name="priority"
+                                id="priority"
+                                value={formValues.priority}
+                                onChange={handleChange}
+                                required
+                            >
+                                <option value="low">Low</option>
+                                <option value="medium">Medium</option>
+                                <option value="high">High</option>
+                            </select>
+                            <label htmlFor="priority">Priority</label>
+                        </div>
+
+                        <div className="form-group">
+                            <input
+                                type="date"
+                                name="due_date"
+                                id = 'due_date'
+                                value= {formValues.due_date}
+                                onChange={handleChange}
+                                required
+                            />
+                            <label htmlFor="due_date">Due Date</label>
+                        </div>
+
+                        <div className="form-group">
+                            <input
+                                type="time"
+                                name="due_time"
+                                id = "due_time"
+                                value={formValues.due_time}
+                                onChange={handleChange}
+                            />
+                            <label htmlFor="due_time">Due Time</label>
+                        </div>
+
+                        <button type="submit">
+                            {isAdding ? "Add" : "Edit"} Task
+                        </button>
+                    </form>
+                </div>
             </div>
-        </div>
+        </>
     );
-}
+};
 
 export default ManipulateTask;

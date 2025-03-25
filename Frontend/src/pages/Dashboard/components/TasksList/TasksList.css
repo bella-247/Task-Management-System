@@ -10,7 +10,7 @@ ul.tasks-list-container {
 ul.tasks-list-container .tasks {
   position: relative;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.851);
+  background-color: rgba(0, 0, 0, 0.8);
   color: white;
   padding: 1rem;
   border-radius: 0.5rem;
@@ -28,15 +28,19 @@ ul.tasks-list-container .tasks .task-content-container .title {
   font-size: 1.25rem;
   font-weight: bold;
 }
+ul.tasks-list-container .tasks .task-content-container .description {
+  max-height: 100px;
+  overflow: hidden auto;
+}
 ul.tasks-list-container .tasks .properties-container {
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
 }
 ul.tasks-list-container .tasks .properties-container .properties {
   font-size: 0.8rem;
   padding: 0.25rem 0.5rem;
   background-color: #757575;
-  color: rgb(255, 255, 255);
+  color: #ffffff;
   border-radius: 0.25rem;
   display: flex;
   align-items: center;
@@ -49,14 +53,19 @@ ul.tasks-list-container .tasks .properties-container .properties::before {
   border-radius: 50%;
   background-color: #fff;
 }
-ul.tasks-list-container .tasks .properties-container .properties.good {
+ul.tasks-list-container .tasks .properties-container .properties.good::before {
   background-color: lime;
 }
-ul.tasks-list-container .tasks .properties-container .properties.bad {
+ul.tasks-list-container .tasks .properties-container .properties.bad::before {
   background-color: red;
 }
-ul.tasks-list-container .tasks .properties-container .properties.normal {
-  background-color: yellow;
+ul.tasks-list-container .tasks .properties-container .properties.warn::before {
+  background-color: orange;
+}
+ul.tasks-list-container .tasks .due-date {
+  font-size: 0.8rem;
+  color: #999;
+  text-align: right;
 }
 ul.tasks-list-container .tasks .editing-btns-container {
   visibility: hidden;
@@ -72,6 +81,7 @@ ul.tasks-list-container .tasks .editing-btns-container {
   transition-timing-function: linear;
 }
 ul.tasks-list-container .tasks .editing-btns-container .btns {
+  font-size: 0.9rem;
   background-color: white;
   color: black;
   padding: 0.25rem 0.5rem;

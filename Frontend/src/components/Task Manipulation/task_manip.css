@@ -10,7 +10,6 @@
   justify-content: center;
   align-items: center;
   padding: 0 1rem;
-  background-color: rgba(0, 0, 0, 0.5);
   -webkit-backdrop-filter: blur(5px);
           backdrop-filter: blur(5px);
   animation: showup 200ms linear forwards;
@@ -25,8 +24,11 @@
     opacity: 1;
   }
 }
+.add-task-container .form-container {
+  width: 100%;
+}
 .add-task-container .form-container form#add-task-form {
-  width: clamp(325px, 80%, 350px);
+  width: clamp(20rem, 80%, 22rem);
   max-height: 90%;
   overflow-y: auto;
   margin: auto;
@@ -35,14 +37,13 @@
   gap: 1rem;
   padding: 1.5rem 2rem 2rem;
   border-radius: 0.5rem;
-  background-color: white;
 }
 .add-task-container .form-container form#add-task-form h1 {
   text-align: center;
 }
 .add-task-container .form-container form#add-task-form .form-group {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   gap: 0.25rem;
 }
 .add-task-container .form-container form#add-task-form .form-group input, .add-task-container .form-container form#add-task-form .form-group textarea, .add-task-container .form-container form#add-task-form .form-group select {
@@ -52,13 +53,14 @@
   border-radius: 0.25rem;
   border: none;
   outline: none;
-  background-color: rgba(0, 0, 0, 0.0666666667);
-  color: black;
-  transition: background-color 100ms linear;
 }
 .add-task-container .form-container form#add-task-form .form-group input:focus-visible, .add-task-container .form-container form#add-task-form .form-group textarea:focus-visible, .add-task-container .form-container form#add-task-form .form-group select:focus-visible {
-  outline: 2px solid rgba(0, 0, 0, 0.0666666667);
   outline-offset: 2px;
+}
+.add-task-container .form-container form#add-task-form .form-group input:required + label::after, .add-task-container .form-container form#add-task-form .form-group textarea:required + label::after, .add-task-container .form-container form#add-task-form .form-group select:required + label::after {
+  content: "*";
+  color: red;
+  margin-left: 0.25rem;
 }
 .add-task-container .form-container form#add-task-form .form-group textarea {
   resize: vertical;
@@ -89,4 +91,45 @@
 .add-task-container .form-container form#add-task-form button:focus-visible {
   outline: 2px solid #ffdd00;
   outline-offset: 2px;
+}
+
+.add-task-container.light {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.add-task-container.light .form-container form#add-task-form {
+  background-color: #fff;
+}
+.add-task-container.light .form-container form#add-task-form .form-group input, .add-task-container.light .form-container form#add-task-form .form-group textarea, .add-task-container.light .form-container form#add-task-form .form-group select {
+  background-color: rgba(0, 0, 0, 0.0666666667);
+  color: black;
+}
+.add-task-container.light .form-container form#add-task-form .form-group input:focus-visible, .add-task-container.light .form-container form#add-task-form .form-group textarea:focus-visible, .add-task-container.light .form-container form#add-task-form .form-group select:focus-visible {
+  outline: 2px solid rgba(0, 0, 0, 0.0666666667);
+}
+.add-task-container.light .form-container form#add-task-form .form-group input::-moz-placeholder, .add-task-container.light .form-container form#add-task-form .form-group textarea::-moz-placeholder, .add-task-container.light .form-container form#add-task-form .form-group select::-moz-placeholder {
+  color: #555;
+}
+.add-task-container.light .form-container form#add-task-form .form-group input::placeholder, .add-task-container.light .form-container form#add-task-form .form-group textarea::placeholder, .add-task-container.light .form-container form#add-task-form .form-group select::placeholder {
+  color: #555;
+}
+
+.add-task-container.dark {
+  background-color: rgba(34, 34, 34, 0.2666666667);
+}
+.add-task-container.dark .form-container form#add-task-form {
+  background-color: #555;
+}
+.add-task-container.dark .form-container form#add-task-form .form-group input, .add-task-container.dark .form-container form#add-task-form .form-group textarea, .add-task-container.dark .form-container form#add-task-form .form-group select {
+  background-color: #1b1919;
+  color: white;
+  accent-color: white;
+}
+.add-task-container.dark .form-container form#add-task-form .form-group input:focus-visible, .add-task-container.dark .form-container form#add-task-form .form-group textarea:focus-visible, .add-task-container.dark .form-container form#add-task-form .form-group select:focus-visible {
+  outline: 2px solid #000;
+}
+.add-task-container.dark .form-container form#add-task-form .form-group input::-moz-placeholder, .add-task-container.dark .form-container form#add-task-form .form-group textarea::-moz-placeholder, .add-task-container.dark .form-container form#add-task-form .form-group select::-moz-placeholder {
+  color: #999;
+}
+.add-task-container.dark .form-container form#add-task-form .form-group input::placeholder, .add-task-container.dark .form-container form#add-task-form .form-group textarea::placeholder, .add-task-container.dark .form-container form#add-task-form .form-group select::placeholder {
+  color: #999;
 }/*# sourceMappingURL=task_manip.css.map */

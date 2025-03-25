@@ -3,6 +3,7 @@ from app.models.user import User
 from sqlalchemy import or_
 from app import db
 from time import sleep
+from datetime import timedelta
 
 def register_user(data):
     try:
@@ -26,7 +27,7 @@ def register_user(data):
 
         db.session.add(new_user)
         db.session.commit()
-        access_token = create_access_token(identity=new_user.id)
+        access_token = create_access_token(identity=str(new_user.id), expires_delta=timedelta(days=1))  # 1 day expiration
 
         sleep(5)
         return {
@@ -38,7 +39,7 @@ def register_user(data):
     except Exception as e:
         db.session.rollback()
         print("Error : ", e)
-        sleep(5)
+        sleep(1)
         return {"message": str(e)}, 400
 
 
@@ -48,9 +49,9 @@ def login_user(data):
         user = User.query.filter_by(**{filterBy: data['username']}).first()
 
         if user and user.check_password(data['password']):
-                access_token = create_access_token(identity = user.id)
+                access_token = create_access_token(identity = str(user.id), expires_delta=timedelta(days=1))  # 1 day expiration
 
-                sleep(5)
+                sleep(1)
                 return {
                     "access_token": access_token,
                     "message": "User successfully logged in",

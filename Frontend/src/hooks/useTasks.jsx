@@ -1,20 +1,20 @@
-import { useState } from "react"
+import { useEffect, useState, useContext} from "react"
 import api from "../api/api";
-import axios from "axios";
+import { TasksContext } from "../context/TasksContext";
 
 
 const useTasks = ()=>{
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null);
-    const [tasks, setTasks] = useState([]);
+    const {tasks, setTasks} = useContext(TasksContext);
 
     const get_tasks = async ()=>{
         setLoading(true);
         try{
-            const response = await api.get("/tasks/");
+            const response = await api.get("/tasks");
 
-            console.log('reponse', response)
-            setTasks(response?.data?.tasks || []);
+            setTasks([...response?.data?.tasks]);
+            setError(null)
             return "success";
         }
         catch(err){
@@ -29,7 +29,7 @@ const useTasks = ()=>{
         setLoading(true);
         try{
             const response = await api.post("/tasks", taskData);
-            setTasks([...tasks, response.data]);
+            setTasks([response.data.task, ...tasks]);
             setError(null);
             return response.data;
         }
@@ -45,8 +45,9 @@ const useTasks = ()=>{
         setLoading(true);
         try{
             const response = await api.put(`/tasks/${taskData.id}`, taskData);
+
             const updatedTasks = tasks.map((task)=>{
-                return task.id === taskData.id ? response.data : task
+                return task.id == taskData.id ? response?.data?.task : task;
                 });
 
             setTasks(updatedTasks);
@@ -60,6 +61,8 @@ const useTasks = ()=>{
         }
     }
 
+
+    
     const delete_task = async (id)=>{
         setLoading(true);
         try{

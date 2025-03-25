@@ -4,14 +4,13 @@ from sqlalchemy import Enum
 
 class Tasks(db.Model):
     __priorities = ["high", "medium", "low"]
-    __statuses = ["Completed", "Almost finished", "In progress", "Not started"]
+    __statuses = ["Completed", "In progress", "Not started"]
 
     __tablename__ = "tasks"
 
     id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.String(255), nullable = False)
     description = db.Column(db.Text, nullable = True)
-    isDone = db.Column(db.Boolean, default = False, server_default = "0")
     priority = db.Column(Enum(*__priorities, name = "priority_enum", native_enum = False), default = "medium", server_default = "medium", nullable = False )
     status = db.Column(Enum(*__statuses, name = 'status_enum', native_enum = False), default = "Not started", server_default = "Not started", nullable = False)
     due_date = db.Column(db.Date, nullable = False)
@@ -39,12 +38,6 @@ class Tasks(db.Model):
         if value not in self.__priorities: 
             raise AssertionError(f"{key} must be one of {self.__priorities}")
         return value
-
-    @validates('isDone')
-    def validate_isDone(self, key, isDone):
-        if isDone is None:
-            raise AssertionError('isDone cannot be blank')
-        return isDone
     
     @validates('due_date')
     def validate_due_date(self, key, due_date):
@@ -57,7 +50,6 @@ class Tasks(db.Model):
             'id': self.id,
             'title': self.title,
             'description': self.description,
-            'isDone': self.isDone,
             'priority': self.priority,
             'status': self.status,
             'due_date': self.due_date,
