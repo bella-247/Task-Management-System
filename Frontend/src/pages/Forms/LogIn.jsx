@@ -1,19 +1,34 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import useAuth from "../../hooks/useAuth";
 import MessageBox from "../../components/MessageBox/MessageBox";
 import "./Forms.css";
+import { AuthContext } from "../../context/AuthContext";
+import { ThemeContext } from "../../context/ThemeContext";
 
 const LogIn = () => {
+    const {theme} = useContext(ThemeContext);
+    const {registered, setRegistered} = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    useEffect(()=>{
+        if(registered){
+            navigate("/dashboard");
+        }
+    }, [])
+
+
+
+
+
     const { loginUser, loading, error } = useAuth();
     const [redirecting, setRedirecting] = useState(false);
     const [formError, setFormError] = useState(null);
-    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const userData = {
-            username: e.target.username.value.trim(),
+            email: e.target.email.value.trim(),
             password: e.target.password.value.trim(),
         };
         // validate all fields before submitting
@@ -21,10 +36,14 @@ const LogIn = () => {
             setFormError("Please fill in all fields correctly");
             return;
         }
+        else{
+            setFormError(null)
+        }
 
         try {
             const data = await loginUser(userData);
             if (data) {
+                setRegistered(true);
                 setRedirecting(true);
                 setTimeout(() => { navigate("/dashboard"); }, 2000);
             }
@@ -37,7 +56,7 @@ const LogIn = () => {
     const isDisabled = loading || redirecting;
 
     return (
-        <main className="login-form">
+        <main className={`login-form ${theme}`}>
             {loading && (
                 <MessageBox
                     mode="info"
@@ -74,11 +93,11 @@ const LogIn = () => {
             <form method="POST" onSubmit={handleSubmit}>
                 <h1>Log In</h1>
                 <div className="form-group">
-                    <label htmlFor="username">Username or Email </label>
+                    <label htmlFor="email">Username or Email </label>
                     <input
                         type="text"
-                        id="username"
-                        name="username"
+                        id="email"
+                        name="email"
                         disabled={isDisabled}
                         required
                     />

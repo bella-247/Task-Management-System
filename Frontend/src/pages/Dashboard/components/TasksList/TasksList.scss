@@ -31,6 +31,14 @@ ul.tasks-list-container{
             .description{
                 max-height: 100px;
                 overflow: hidden auto;
+                &::-webkit-scrollbar{
+                    width: 3px;
+                    background-color: rgb(0, 0, 0);
+                    border-radius: 0.5rem;
+                }
+                &::-webkit-scrollbar-thumb{
+                    background-color: white;
+                }
             }
         }
         .properties-container{

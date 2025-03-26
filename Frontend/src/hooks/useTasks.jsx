@@ -1,7 +1,6 @@
-import { useEffect, useState, useContext} from "react"
+import { useState, useContext} from "react"
 import api from "../api/api";
 import { TasksContext } from "../context/TasksContext";
-
 
 const useTasks = ()=>{
     const [loading, setLoading] = useState(false)
@@ -11,8 +10,9 @@ const useTasks = ()=>{
     const get_tasks = async ()=>{
         setLoading(true);
         try{
+            console.log(api)
             const response = await api.get("/tasks");
-
+            console.log(response)
             setTasks([...response?.data?.tasks]);
             setError(null)
             return "success";
@@ -93,3 +93,6 @@ const useTasks = ()=>{
 }
 
 export default useTasks;
+
+
+

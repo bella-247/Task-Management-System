@@ -1,5 +1,4 @@
 import axios from "axios"
-
 const API_URL = "http://127.0.0.1:5000"
 
 const api = axios.create({
@@ -13,7 +12,6 @@ api.interceptors.request.use(
         // Add debugging
         
         if (!access_token) {
-            alert("Access token not found, please log in again");
             window.location.href = "/login";
             return Promise.reject("Access token not found");
         }
@@ -27,6 +25,19 @@ api.interceptors.request.use(
         return config;
     },
     (error) => {
+        return Promise.reject(error);
+    }
+);
+
+
+api.interceptors.response.use(
+    (response) => response, // Pass successful responses through
+    (error) => {
+        if (error.response && (error.response.status === 401 || error.response.status === 422)) {
+            localStorage.removeItem("access_token"); // Clear token
+            window.location.href = "/login"; // Redirect to login page
+        }
+
         return Promise.reject(error);
     }
 );

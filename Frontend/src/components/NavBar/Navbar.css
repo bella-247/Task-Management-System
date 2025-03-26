@@ -13,7 +13,11 @@ header nav {
   align-items: center;
   justify-content: space-between;
 }
-header nav .theme-toggler {
+header nav .btns-container {
+  display: flex;
+  gap: 1rem;
+}
+header nav .btns-container .theme-toggler {
   width: 40px;
   aspect-ratio: 1/1;
   padding: 0.25rem;
@@ -24,11 +28,23 @@ header nav .theme-toggler {
   border-radius: 50%;
   cursor: pointer;
 }
-header nav .theme-toggler .theme-toggler-icon {
+header nav .btns-container .theme-toggler .theme-toggler-icon {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+}
+header nav .btns-container .log-out-btn {
+  cursor: pointer;
+  padding: 0.25rem 1rem;
+  border: 2px solid red;
+  background-color: transparent;
+  transition: background-color 150ms linear;
+  border-radius: 0.5rem;
+  color: inherit;
+}
+header nav .btns-container .log-out-btn:hover {
+  background-color: red;
 }
 header nav.light {
   background-color: #000;

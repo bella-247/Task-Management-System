@@ -11,20 +11,36 @@ header{
         display: flex;
         align-items: center;
         justify-content: space-between;
-        .theme-toggler{
-            width: 40px;
-            aspect-ratio: 1/1;
-            padding: 0.25rem;
+        .btns-container{
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: white;
-            border-radius: 50%;
-            cursor: pointer;
-            .theme-toggler-icon{
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
+            gap: 1rem;
+            .theme-toggler{
+                width: 40px;
+                aspect-ratio: 1/1;
+                padding: 0.25rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background-color: white;
+                border-radius: 50%;
+                cursor: pointer;
+                .theme-toggler-icon{
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+            .log-out-btn{
+                cursor: pointer;
+                padding: 0.25rem 1rem;
+                border: 2px solid red;
+                background-color: transparent;
+                transition: background-color 150ms linear;
+                border-radius: 0.5rem;
+                color: inherit;
+                &:hover{
+                    background-color: red;
+                }
             }
         }
     }

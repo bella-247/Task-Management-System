@@ -1,14 +1,25 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import MessageBox from "../../components/MessageBox/MessageBox";
 import "./Forms.css";
+import { AuthContext } from "../../context/AuthContext";
+import { ThemeContext } from "../../context/ThemeContext";
 
 const SignUp = () => {
+    const {theme} = useContext(ThemeContext)
+    const {registered, setRegistered} = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    useEffect(()=>{
+        if(registered){
+            navigate("/dashboard");
+        }
+    }, [])
+
     const { registerUser, loading, error } = useAuth();
     const [redirecting, setRedirecting] = useState(false);
     const [formError, setFormError] = useState(null)
-    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -20,13 +31,17 @@ const SignUp = () => {
 
         // validate all fields before submitting
         if (Object.values(userData).some((field) => field === "")) {
-            alert("Please fill in all fields");
+            setFormError("Please fill in all fields");
             return;
+        }
+        else{
+            setFormError(null)
         }
 
         try {
             const data = await registerUser(userData);
             if (data) {
+                setRegistered(true);
                 setRedirecting(true);
                 setTimeout(() => { navigate("/dashboard"); }, 2000);
             }
@@ -39,7 +54,7 @@ const SignUp = () => {
     const isDisabled = loading || redirecting;
 
     return (
-        <main className="register-form">
+        <main className={`register-form ${theme}`}>
             {loading && (
                 <MessageBox
                     mode="info"

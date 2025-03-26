@@ -8,13 +8,6 @@ import { TasksProvider } from "./context/TasksContext";
 import { AuthProvider } from "./context/AuthContext";
 
 const App = () => {
-    window.addEventListener("load", ()=>{
-        const token = localStorage.getItem("access_token");
-        if(!token && window.location.pathname !== "/login" && window.location.pathname !== "/signup"){
-          window.location.href = "/signup";
-        }
-      })
-
     return (
         <AuthProvider>
             <ThemeProvider>

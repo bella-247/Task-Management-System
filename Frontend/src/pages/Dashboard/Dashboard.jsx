@@ -4,10 +4,13 @@ import ManipulateTask from "../../components/Task Manipulation/Task_Manip";
 import TasksList from "./components/TasksList/TasksList";
 import "./Dashboard.css";
 import { TasksContext } from "../../context/TasksContext";
+import { AuthContext } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
     const { theme } = useContext(ThemeContext);
-    const { tasks } = useContext(TasksContext);
+    const { tasks} = useContext(TasksContext);
+
     const [taskLists, setTaskLists] = useState(null)
 
     const [isAdding, setIsAdding] = useState(false);
@@ -20,10 +23,10 @@ const Dashboard = () => {
         priority: "all",
     });
 
+
     const Edit = (id) => {
         const elem = document.querySelector(`.tasks[data-id="${id}"]`);
         if (elem) {
-            // elem.dataset.due_date = extractDate(elem.dataset.due_date);
             setEditingValues(elem.dataset);
             setIsUpdating(true);
             setIsAdding(false);

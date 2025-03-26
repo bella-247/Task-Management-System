@@ -29,7 +29,7 @@ def register_user(data):
         db.session.commit()
         access_token = create_access_token(identity=str(new_user.id), expires_delta=timedelta(days=1))  # 1 day expiration
 
-        sleep(5)
+        sleep(1)
         return {
             "message": "User successfully registered",
             "access_token": access_token,
@@ -45,8 +45,8 @@ def register_user(data):
 
 def login_user(data):
     try:
-        filterBy = 'email' if '@' in data['username'] else 'username' 
-        user = User.query.filter_by(**{filterBy: data['username']}).first()
+        filterBy = 'email' if '@' in data['email'] else 'username' 
+        user = User.query.filter_by(**{filterBy: data['email']}).first()
 
         if user and user.check_password(data['password']):
                 access_token = create_access_token(identity = str(user.id), expires_delta=timedelta(days=1))  # 1 day expiration
@@ -58,8 +58,8 @@ def login_user(data):
                     "user" : user.to_dict()
                     }
         else:
-            sleep(5)
-            return {"message" : "Invalid Username or password"}, 404
+            sleep(1)
+            return {"message" : "Invalid Email or password"}, 404
         
 
     except Exception as e:

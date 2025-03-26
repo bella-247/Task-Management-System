@@ -7,8 +7,6 @@ main.register-form, main.login-form {
 }
 main.register-form form, main.login-form form {
   width: clamp(300px, 50vw, 400px);
-  border: 2px solid black;
-  box-shadow: 0 10px rgb(0, 0, 0);
   padding: 2rem;
   border-radius: 1rem;
   display: flex;
@@ -34,23 +32,13 @@ main.register-form form .form-group input, main.login-form form .form-group inpu
   outline: none;
   border: none;
   padding: 0.5rem 1rem;
-  background-color: rgba(51, 51, 255, 0.1333333333) !important;
   transition-property: box-shadow, background-color;
   transition-duration: 100ms;
   transition-timing-function: linear;
 }
-main.register-form form .form-group input:focus, main.login-form form .form-group input:focus {
-  box-shadow: 0 2px #000;
-}
-main.register-form form .form-group input:disabled, main.login-form form .form-group input:disabled {
-  background-color: rgba(85, 85, 85, 0.3333333333);
-  cursor: not-allowed;
-}
 main.register-form form button[type=submit], main.login-form form button[type=submit] {
   width: 100%;
   padding: 0.75rem 1rem;
-  background-color: #000;
-  color: white;
   border: none;
   border-radius: 0.5rem;
   cursor: pointer;
@@ -58,17 +46,83 @@ main.register-form form button[type=submit], main.login-form form button[type=su
   font-size: 1.2rem;
   transition: 100ms background-color linear;
 }
-main.register-form form button[type=submit]:not(:disabled):hover, main.login-form form button[type=submit]:not(:disabled):hover {
+
+main.register-form.light, main.login-form.light {
+  background: white;
+  color: black;
+}
+main.register-form.light form, main.login-form.light form {
+  border: 2px solid black;
+  box-shadow: 0 10px rgb(0, 0, 0);
+}
+main.register-form.light form .form-group input, main.login-form.light form .form-group input {
+  background-color: rgba(51, 51, 255, 0.1333333333);
+}
+main.register-form.light form .form-group input:focus, main.login-form.light form .form-group input:focus {
+  box-shadow: 0 2px #000;
+}
+main.register-form.light form .form-group input:disabled, main.login-form.light form .form-group input:disabled {
+  background-color: rgba(85, 85, 85, 0.3333333333);
+  cursor: not-allowed;
+}
+main.register-form.light form button[type=submit], main.login-form.light form button[type=submit] {
+  background-color: #000;
+  color: white;
+}
+main.register-form.light form button[type=submit]:not(:disabled):hover, main.login-form.light form button[type=submit]:not(:disabled):hover {
   background-color: #333;
 }
-main.register-form form button[type=submit]:active, main.login-form form button[type=submit]:active {
+main.register-form.light form button[type=submit]:active, main.login-form.light form button[type=submit]:active {
   background-color: #111;
 }
-main.register-form form button[type=submit]:disabled, main.login-form form button[type=submit]:disabled {
+main.register-form.light form button[type=submit]:disabled, main.login-form.light form button[type=submit]:disabled {
   background-color: #555;
   cursor: not-allowed;
 }
-main.register-form form button[type=submit]:focus-visible, main.login-form form button[type=submit]:focus-visible {
+main.register-form.light form button[type=submit]:focus-visible, main.login-form.light form button[type=submit]:focus-visible {
   outline: 2px solid #000;
   outline-offset: 2px;
+}
+main.register-form.light form a, main.login-form.light form a {
+  color: blue;
+}
+
+main.register-form.dark, main.login-form.dark {
+  background: black;
+  color: white;
+}
+main.register-form.dark form, main.login-form.dark form {
+  border: 2px solid white;
+  box-shadow: 0 10px rgb(255, 255, 255);
+}
+main.register-form.dark form .form-group input, main.login-form.dark form .form-group input {
+  background-color: #ddd;
+}
+main.register-form.dark form .form-group input:focus, main.login-form.dark form .form-group input:focus {
+  box-shadow: 0 2px #b2b2b2;
+}
+main.register-form.dark form .form-group input:disabled, main.login-form.dark form .form-group input:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+}
+main.register-form.dark form button[type=submit], main.login-form.dark form button[type=submit] {
+  background-color: #fff;
+  color: black;
+}
+main.register-form.dark form button[type=submit]:not(:disabled):hover, main.login-form.dark form button[type=submit]:not(:disabled):hover {
+  background-color: #ccc;
+}
+main.register-form.dark form button[type=submit]:active, main.login-form.dark form button[type=submit]:active {
+  background-color: #eee;
+}
+main.register-form.dark form button[type=submit]:disabled, main.login-form.dark form button[type=submit]:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+}
+main.register-form.dark form button[type=submit]:focus-visible, main.login-form.dark form button[type=submit]:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+main.register-form.dark form a, main.login-form.dark form a {
+  color: lightblue;
 }/*# sourceMappingURL=Forms.css.map */

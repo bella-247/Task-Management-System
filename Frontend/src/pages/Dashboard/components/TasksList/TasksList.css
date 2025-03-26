@@ -32,6 +32,14 @@ ul.tasks-list-container .tasks .task-content-container .description {
   max-height: 100px;
   overflow: hidden auto;
 }
+ul.tasks-list-container .tasks .task-content-container .description::-webkit-scrollbar {
+  width: 3px;
+  background-color: rgb(0, 0, 0);
+  border-radius: 0.5rem;
+}
+ul.tasks-list-container .tasks .task-content-container .description::-webkit-scrollbar-thumb {
+  background-color: white;
+}
 ul.tasks-list-container .tasks .properties-container {
   display: flex;
   gap: 0.5rem;

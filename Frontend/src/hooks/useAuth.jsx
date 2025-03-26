@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
+import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const API_URL = "http://127.0.0.1:5000/auth";
 
 const useAuth = ()=>{
+    const {setRegistered} = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     const registerUser = async (userData) => {
         setLoading(true);
@@ -48,9 +52,7 @@ const useAuth = ()=>{
                     "Content-Type": "application/json"
                 }
             });
-            
-            // Add debugging
-            
+
             const { access_token, user } = response.data;
             
             if (!access_token) {
@@ -72,8 +74,15 @@ const useAuth = ()=>{
             setLoading(false);
         }
     };
+
+    const logOut = ()=>{
+        setRegistered(false)
+        navigate("/signup")
+        localStorage.removeItem("access_token")
+        localStorage.removeItem('user')
+    }
     
-    return {registerUser, loginUser, loading, error}
+    return {registerUser, loginUser, loading, error, logOut}
 }
 
 export default useAuth;

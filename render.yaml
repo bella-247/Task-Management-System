@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: task-management-api
+    env: python
+    buildCommand: |
+      cd Backend/Flask_app
+      pip install -r requirements.txt
+      flask db upgrade
+    startCommand: cd Backend/Flask_app && gunicorn app:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.9.0
+      - key: FLASK_APP
+        value: app
+      - key: FLASK_ENV
+        value: production
+      - key: JWT_SECRET_KEY
+        generateValue: true
+      - key: SQLALCHEMY_DATABASE_URI
+        sync: false
+      - key: SQLALCHEMY_TRACK_MODIFICATIONS
+        value: false
+    healthCheckPath: /health
+    autoDeploy: true
+
+databases:
+  - name: task-management-db
+    databaseName: taskdb
+    user: task_user
+    plan: free
