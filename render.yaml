@@ -6,7 +6,7 @@ services:
       cd Backend/Flask_app
       pip install -r requirements.txt
       flask db upgrade
-    startCommand: cd Backend/Flask_app && gunicorn app:app
+    startCommand: cd Backend/Flask_app && flask run
     envVars:
       - key: PYTHON_VERSION
         value: 3.9.0
