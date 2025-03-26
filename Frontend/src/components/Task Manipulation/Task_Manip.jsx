@@ -15,12 +15,12 @@ const ManipulateTask = ({
     const defaultEditingValues = useMemo(()=>(
         {
             id : "",
-            title: "Bella come here",
-            description: "nice to see you here bella",
-            status: "In progress",
-            priority: "high",
-            due_date: "2005-03-22",
-            due_time: "12:00",
+            title: "",
+            description: "",
+            status: "Not started",
+            priority: "low",
+            due_date: "",
+            due_time: "",
         }
     ), [])
 

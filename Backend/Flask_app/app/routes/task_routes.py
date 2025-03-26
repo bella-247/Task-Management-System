@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from app.models.tasks import Tasks
 from app import db
+from datetime import datetime
 
 task_bp = Blueprint("tasks", __name__)
 
@@ -34,6 +35,8 @@ def add_task():
         data = request.get_json()
         print(data)
         user_id = get_jwt_identity()
+        
+        data['due_date'] = datetime.strptime(data['due_date'], '%Y-%m-%d').date()
 
         del data['id']
         del data['due_time']
@@ -76,6 +79,8 @@ def update_task(id):
     task = Tasks.query.filter_by(user_id = user_id, id = id).first()
     if task:
         data = request.get_json()
+        data['due_date'] = datetime.strptime(data['due_date'], '%Y-%m-%d').date()
+        
         for key, value in data.items():
             if hasattr(task, key):
                 setattr(task, key, value)
