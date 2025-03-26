@@ -1,8 +1,8 @@
-"""initial migration  creating tables
+"""db initialization
 
-Revision ID: 7efd8d3c8461
+Revision ID: 1826a46c7f8f
 Revises: 
-Create Date: 2025-02-26 15:25:07.521641
+Create Date: 2025-03-27 01:16:13.285626
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '7efd8d3c8461'
+revision = '1826a46c7f8f'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -24,6 +24,8 @@ def upgrade():
     sa.Column('email', sa.String(length=255), nullable=False),
     sa.Column('_password_hash', sa.String(length=255), nullable=False),
     sa.Column('profile_picture', sa.String(length=50), nullable=True),
+    sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
+    sa.Column('updated_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
@@ -32,7 +34,12 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=255), nullable=False),
     sa.Column('description', sa.Text(), nullable=True),
-    sa.Column('isDone', sa.Boolean(), server_default='0', nullable=True),
+    sa.Column('priority', sa.Enum('high', 'medium', 'low', name='priority_enum', native_enum=False), server_default='medium', nullable=False),
+    sa.Column('status', sa.Enum('Completed', 'In progress', 'Not started', name='status_enum', native_enum=False), server_default='Not started', nullable=False),
+    sa.Column('due_date', sa.Date(), nullable=False),
+    sa.Column('reminder_time', sa.Date(), nullable=True),
+    sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
+    sa.Column('updated_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
