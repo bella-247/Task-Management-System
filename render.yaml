@@ -6,7 +6,7 @@ services:
       cd Backend/Flask_app
       pip install -r requirements.txt
       flask db upgrade
-    startCommand: cd Backend/Flask_app && flask run
+    startCommand: cd Backend/Flask_app && flask run --host=0.0.0.0 --port=$PORT
     envVars:
       - key: PYTHON_VERSION
         value: 3.9.0
@@ -28,3 +28,5 @@ databases:
     databaseName: taskdb
     user: task_user
     plan: free
+
+
