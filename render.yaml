@@ -15,9 +15,9 @@ services:
       - key: FLASK_ENV
         value: production
       - key: JWT_SECRET_KEY
-        generateValue: true
+        value: "3-VUy%Ftb%oH7t8r]p^[&vA+{5e]SM!>mj'1ocANMU+nb?iqSx=dXWL1'r^4Ty"
       - key: SQLALCHEMY_DATABASE_URI
-        sync: false
+        value: "sqlite:///task_management.sqlite"
       - key: SQLALCHEMY_TRACK_MODIFICATIONS
         value: false
     healthCheckPath: /health
@@ -28,4 +28,3 @@ databases:
     databaseName: taskdb
     user: task_user
     plan: free
-
