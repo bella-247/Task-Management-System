@@ -31,3 +31,4 @@ Thumbs.db     # Windows system file
 *.map
 
 try*
+.vercel

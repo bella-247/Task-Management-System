@@ -17,10 +17,19 @@ def create_app():
     app = Flask(__name__)
     app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
     app.config['JWT_SECRET_KEY'] = JWT_SECRET_KEY
-    app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(days=1)  # 1 day expiration
-    # app.config['PROPAGATE_EXCEPTIONS'] = True
-    app.config['DEBUG'] = True
-    app.config['ENV'] = 'development'
+    app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(days=1)
+    app.config['PROPAGATE_EXCEPTIONS'] = True
+    app.config['DEBUG'] = False
+    app.config['ENV'] = 'production'
+    app.config['HOST'] = '0.0.0.0'
+
+    CORS(app, resources={
+        r"/*": {
+            "origins": "*",  # In production, replace with your specific frontend domain
+            "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+            "allow_headers": ["Content-Type", "Authorization"]
+        }
+    })
 
     db.init_app(app)
     bcrypt.init_app(app)
