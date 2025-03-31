@@ -50,6 +50,10 @@ def create_app():
             'error': 'token_expired'
         }), 401
 
+    @app.route('/health')
+    def health_check():
+        return jsonify({"status": "healthy"}), 200
+
     from app.routes import main
     from app.routes.auth_routes import auth_bp
     from app.routes.task_routes import task_bp
