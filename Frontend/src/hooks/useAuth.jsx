@@ -4,7 +4,7 @@ import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 // const API_URL = "http://127.0.0.1:5000/auth";
-const API_URL = "https://task-management-api.onrender.com/auth"
+const API_URL = "https://task-management-api-ukgs.onrender.com/auth"
 
 const useAuth = ()=>{
     const {setRegistered} = useContext(AuthContext);
