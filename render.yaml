@@ -6,12 +6,12 @@ services:
       cd Backend/Flask_app
       pip install -r requirements.txt
       flask db upgrade
-    startCommand: cd Backend/Flask_app && gunicorn app:app
+    startCommand: cd Backend/Flask_app && gunicorn --bind 0.0.0.0:$PORT wsgi:app
     envVars:
       - key: PYTHON_VERSION
         value: 3.9.0
       - key: FLASK_APP
-        value: app
+        value: wsgi.py
       - key: FLASK_ENV
         value: production
       - key: JWT_SECRET_KEY
@@ -28,6 +28,7 @@ databases:
     databaseName: taskdb
     user: task_user
     plan: free
+
 
 
 
