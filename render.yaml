@@ -6,7 +6,7 @@ services:
       cd Backend/Flask_app
       pip install -r requirements.txt
       flask db upgrade
-    startCommand: cd Backend/Flask_app && python app.py
+    startCommand: cd Backend/Flask_app && gunicorn app:app
     envVars:
       - key: PYTHON_VERSION
         value: 3.9.0
@@ -14,8 +14,6 @@ services:
         value: app
       - key: FLASK_ENV
         value: production
-      - key: PORT
-        value: 10000
       - key: JWT_SECRET_KEY
         value: "3-VUy%Ftb%oH7t8r]p^[&vA+{5e]SM!>mj'1ocANMU+nb?iqSx=dXWL1'r^4Ty"
       - key: SQLALCHEMY_DATABASE_URI

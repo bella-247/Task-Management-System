@@ -43,7 +43,7 @@ const SignUp = () => {
             if (data) {
                 setRegistered(true);
                 setRedirecting(true);
-                setTimeout(() => { navigate("/dashboard"); }, 2000);
+                setTimeout(() => { navigate("/dashboard"); }, 1000);
             }
 
         } catch (err) {

@@ -3,8 +3,8 @@ import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-const API_URL = "http://127.0.0.1:5000/auth";
-// const API_URL = "https://task-management-api.onrender.com/auth"
+// const API_URL = "http://127.0.0.1:5000/auth";
+const API_URL = "https://task-management-api.onrender.com/auth"
 
 const useAuth = ()=>{
     const {setRegistered} = useContext(AuthContext);
@@ -26,15 +26,13 @@ const useAuth = ()=>{
             localStorage.setItem("user", JSON.stringify(response.data.user));
 
             return await new Promise(resolve =>{
-                setTimeout(()=>{
-                    if (response.data){
-                        resolve(response.data)
-                    }
-                    else{
-                        resolve(null)
-                    }
-                }, 1000)
-                })
+                if (response.data){
+                    resolve(response.data)
+                }
+                else{
+                    resolve(null)
+                }
+            })
         }
         catch (err){
             setError(err.response?.data?.message || "Registration Failed")
@@ -64,9 +62,7 @@ const useAuth = ()=>{
             localStorage.setItem("user", JSON.stringify(user));
             
             return await new Promise((resolve) => {
-                setTimeout(() => {
-                    resolve(response.data);
-                }, 1000);
+                resolve(response.data);
             });
         } catch (err) {
             console.error("Login error:", err);

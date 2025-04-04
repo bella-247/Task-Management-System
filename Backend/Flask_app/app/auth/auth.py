@@ -2,7 +2,6 @@ from flask_jwt_extended import create_access_token
 from app.models.user import User
 from sqlalchemy import or_
 from app import db
-from time import sleep
 from datetime import timedelta
 
 def register_user(data):
@@ -29,7 +28,6 @@ def register_user(data):
         db.session.commit()
         access_token = create_access_token(identity=str(new_user.id), expires_delta=timedelta(days=1))  # 1 day expiration
 
-        sleep(1)
         return {
             "message": "User successfully registered",
             "access_token": access_token,
@@ -39,7 +37,6 @@ def register_user(data):
     except Exception as e:
         db.session.rollback()
         print("Error : ", e)
-        sleep(1)
         return {"message": str(e)}, 400
 
 
@@ -51,14 +48,12 @@ def login_user(data):
         if user and user.check_password(data['password']):
                 access_token = create_access_token(identity = str(user.id), expires_delta=timedelta(days=1))  # 1 day expiration
 
-                sleep(1)
                 return {
                     "access_token": access_token,
                     "message": "User successfully logged in",
                     "user" : user.to_dict()
                     }
         else:
-            sleep(1)
             return {"message" : "Invalid Email or password"}, 404
         
 

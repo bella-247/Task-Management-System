@@ -21,7 +21,6 @@ def create_app():
     app.config['PROPAGATE_EXCEPTIONS'] = True
     app.config['DEBUG'] = False
     app.config['ENV'] = 'production'
-    app.config['HOST'] = '0.0.0.0'
 
     CORS(app, resources={
         r"/*": {
